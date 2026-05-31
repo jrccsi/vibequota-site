@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIPAAWorks — HIPAA Compliance for Small Healthcare Practices</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:        #0b1f3a;
+  --navy-mid:    #122847;
+  --navy-soft:   #1a3560;
+  --navy-deep:   #071529;
+  --teal:        #0d9488;
+  --teal-light:  #14b8a8;
+  --teal-pale:   #f0fdfa;
+  --teal-glow:   rgba(13,148,136,0.15);
+  --surface:     #f8fafc;
+  --white:       #ffffff;
+  --border:      #e2e8f0;
+  --border-mid:  #cbd5e1;
+  --ink:         #0f172a;
+  --ink-soft:    #334155;
+  --ink-muted:   #64748b;
+  --critical:    #dc2626;
+  --high:        #ea580c;
+  --resolved:    #059669;
+  --serif:       'Libre Baskerville', Georgia, serif;
+  --sans:        'Sora', system-ui, sans-serif;
+  --radius:      12px;
+  --radius-lg:   20px;
+  --shadow:      0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg:   0 16px 48px rgba(0,0,0,0.14);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+nav.scrolled {
+  background: rgba(11,31,58,0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--teal), #0f766e);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 4px 12px rgba(13,148,136,0.4);
+}
+
+.nav-mark svg {
+  width: 18px; height: 18px;
+  fill: none; stroke: white; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.2px;
+}
+
+.nav-brand span { color: var(--teal-light); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.15s;
+  letter-spacing: 0.1px;
+}
+
+.nav-links a:hover { color: white; }
+
+.nav-demo {
+  background: transparent !important;
+  color: var(--teal-light) !important;
+  padding: 8px 16px;
+  border-radius: 7px;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  border: 1px solid rgba(13,148,136,0.35) !important;
+  transition: all 0.15s !important;
+}
+
+.nav-demo:hover {
+  background: rgba(13,148,136,0.1) !important;
+  border-color: rgba(13,148,136,0.6) !important;
+  color: white !important;
+}
+
+.nav-cta {
+  background: var(--teal) !important;
+  color: white !important;
+  padding: 8px 20px;
+  border-radius: 7px;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  transition: background 0.15s !important;
+  box-shadow: 0 2px 8px rgba(13,148,136,0.35);
+}
+
+.nav-cta:hover { background: var(--teal-light) !important; }
+
+/* ── HERO ────────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy-deep);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 48px 80px;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(13,148,136,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,148,136,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-glow-1 {
+  position: absolute;
+  top: -200px; left: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(13,148,136,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute;
+  bottom: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(13,148,136,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-top-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--teal-light), transparent);
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(13,148,136,0.12);
+  border: 1px solid rgba(13,148,136,0.25);
+  border-radius: 20px;
+  padding: 5px 14px 5px 8px;
+  margin-bottom: 28px;
+}
+
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  background: var(--teal-light);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero-eyebrow span {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--teal-light);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.5vw, 58px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+
+.hero-h1 em {
+  font-style: normal;
+  color: var(--teal-light);
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 40px;
+  max-width: 520px;
+}
+
+.hero-sub strong {
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal);
+  color: white;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.4);
+  letter-spacing: -0.1px;
+}
+
+.btn-primary:hover {
+  background: var(--teal-light);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(13,148,136,0.45);
+}
+
+.btn-primary svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+.btn-ghost-light {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: rgba(255,255,255,0.75);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 14px 24px;
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255,255,255,0.07);
+  color: white;
+  border-color: rgba(255,255,255,0.25);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero-stat-val {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.hero-stat-label {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+  max-width: 110px;
+}
+
+/* ── DASHBOARD MOCKUP ────────────────────────────────────────────────────── */
+.hero-mockup {
+  position: relative;
+}
+
+.mockup-frame {
+  background: var(--navy-mid);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(13,148,136,0.2);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.mockup-bar {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mockup-dot { width: 9px; height: 9px; border-radius: 50%; }
+.mockup-dot:nth-child(1) { background: #ff5f57; }
+.mockup-dot:nth-child(2) { background: #ffbd2e; }
+.mockup-dot:nth-child(3) { background: #28c840; }
+
+.mockup-url {
+  margin-left: 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 3px 12px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  font-family: var(--sans);
+}
+
+.mockup-body { padding: 20px; }
+
+/* Mini dashboard inside mockup */
+.mini-dash { display: flex; flex-direction: column; gap: 12px; }
+
+.mini-alert {
+  background: rgba(11,31,58,0.8);
+  border: 1px solid rgba(13,148,136,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mini-alert-icon {
+  width: 26px; height: 26px;
+  background: rgba(234,88,12,0.2);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.mini-alert-icon svg { width: 13px; height: 13px; stroke: #fb923c; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+.mini-alert-text { flex: 1; }
+.mini-alert-title { font-size: 10px; font-weight: 600; color: white; margin-bottom: 2px; }
+.mini-alert-sub { font-size: 9px; color: rgba(255,255,255,0.45); }
+.mini-alert-btn {
+  font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.08); border-radius: 4px;
+  padding: 3px 8px; white-space: nowrap; flex-shrink: 0;
+}
+
+.mini-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+
+.mini-kpi {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.mini-kpi-label { font-size: 7.5px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; font-weight: 600; }
+.mini-kpi-val { font-family: var(--serif); font-size: 18px; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+.mini-kpi-sub { font-size: 7px; color: rgba(255,255,255,0.35); }
+
+.mini-kpi.alert { background: rgba(220,38,38,0.08); border-color: rgba(220,38,38,0.2); }
+.mini-kpi.alert .mini-kpi-val { color: #f87171; }
+
+.mini-gaps { display: flex; flex-direction: column; gap: 6px; }
+
+.mini-gap-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 7px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot-c { background: #dc2626; }
+.dot-h { background: #ea580c; }
+.dot-m { background: #ca8a04; }
+
+.mini-gap-text { flex: 1; font-size: 8.5px; color: rgba(255,255,255,0.65); line-height: 1.3; }
+
+.mini-tag {
+  font-size: 7px; font-weight: 600;
+  padding: 2px 6px; border-radius: 3px;
+  white-space: nowrap;
+}
+
+.tag-teal { background: rgba(13,148,136,0.2); color: var(--teal-light); }
+.tag-orange { background: rgba(234,88,12,0.15); color: #fb923c; }
+
+/* ── URGENCY BANNER ──────────────────────────────────────────────────────── */
+.urgency {
+  background: var(--navy);
+  padding: 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.urgency::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(13,148,136,0.4), transparent);
+}
+
+.urgency::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(13,148,136,0.2), transparent);
+}
+
+.urgency-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.urgency-badge {
+  background: rgba(234,88,12,0.15);
+  border: 1px solid rgba(234,88,12,0.3);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fb923c;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.urgency-text {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+
+.urgency-text strong { color: white; font-weight: 600; }
+
+.urgency-cta {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal-light);
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap 0.15s;
+}
+
+.urgency-cta:hover { gap: 8px; }
+
+/* ── SHARED SECTION STYLES ───────────────────────────────────────────────── */
+section { padding: 96px 48px; }
+
+.container { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 20px; height: 2px;
+  background: var(--teal);
+  border-radius: 1px;
+}
+
+.section-h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+  margin-bottom: 16px;
+}
+
+.section-h2.light { color: white; }
+
+.section-sub {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  max-width: 580px;
+}
+
+.section-sub.light { color: rgba(255,255,255,0.6); }
+
+/* ── STATS STRIP ─────────────────────────────────────────────────────────── */
+.stats-strip {
+  background: var(--surface);
+  padding: 72px 48px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.stat-block {
+  background: white;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.stat-block:hover { background: var(--teal-pale); }
+
+.stat-num {
+  font-family: var(--serif);
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.stat-source { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+
+.stat-desc {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 280px;
+}
+
+/* ── THE PROBLEM ─────────────────────────────────────────────────────────── */
+.problem { background: white; }
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.problem-quote {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--ink);
+  position: relative;
+  padding-left: 32px;
+}
+
+.problem-quote::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px; bottom: 6px;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--teal), var(--teal-light));
+  border-radius: 2px;
+}
+
+.problem-quote em {
+  font-style: normal;
+  color: var(--teal);
+  font-weight: 700;
+}
+
+.problem-items { display: flex; flex-direction: column; gap: 20px; }
+
+.problem-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+
+.problem-item:hover {
+  border-color: var(--teal);
+  background: var(--teal-pale);
+  transform: translateX(4px);
+}
+
+.problem-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.pi-red { background: #fef2f2; }
+.pi-orange { background: #fff7ed; }
+.pi-yellow { background: #fefce8; }
+
+.problem-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pi-red svg { stroke: #dc2626; }
+.pi-orange svg { stroke: #ea580c; }
+.pi-yellow svg { stroke: #ca8a04; }
+
+.problem-item-title { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.problem-item-desc { font-size: 12.5px; color: var(--ink-muted); line-height: 1.5; }
+
+/* ── HOW IT WORKS ────────────────────────────────────────────────────────── */
+.how { background: var(--navy); position: relative; overflow: hidden; }
+
+.how-glow {
+  position: absolute;
+  top: -100px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-top: 56px;
+  position: relative;
+}
+
+.how-steps::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: calc(10% + 24px);
+  right: calc(10% + 24px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light), var(--teal));
+  opacity: 0.3;
+}
+
+.how-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+}
+
+.how-num {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 0 0 6px rgba(13,148,136,0.15);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.how-step-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.how-step-desc {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.55;
+}
+
+/* ── DIFFERENTIATORS ─────────────────────────────────────────────────────── */
+.diff { background: var(--surface); }
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.diff-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s;
+  box-shadow: var(--shadow);
+}
+
+.diff-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.diff-card:hover {
+  border-color: rgba(13,148,136,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.1);
+}
+
+.diff-card:hover::before { transform: scaleX(1); }
+
+.diff-num {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.diff-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.3;
+  font-family: var(--serif);
+}
+
+.diff-body {
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.diff-example {
+  font-size: 12.5px;
+  color: var(--teal);
+  font-style: italic;
+  border-left: 2px solid var(--teal);
+  padding-left: 12px;
+  line-height: 1.5;
+}
+
+/* ── COST SECTION ────────────────────────────────────────────────────────── */
+.cost { background: white; }
+
+.cost-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: start;
+  margin-top: 56px;
+}
+
+.cost-table {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cost-table-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 12px 24px;
+  background: var(--navy);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--teal-light);
+}
+
+.cost-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+  transition: background 0.1s;
+}
+
+.cost-row:last-child { border-bottom: none; }
+.cost-row:hover { background: var(--teal-pale); }
+
+.cost-row.total {
+  background: var(--navy);
+  font-weight: 700;
+}
+
+.cost-row.total .cost-cat { color: white; }
+.cost-row.total .cost-range { color: var(--teal-light); font-family: var(--serif); font-size: 15px; }
+
+.cost-cat { color: var(--ink-soft); }
+.cost-range { color: var(--ink); font-weight: 600; text-align: right; }
+
+.cost-callout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 80px;
+}
+
+.callout-big {
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.callout-big::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+}
+
+.callout-big-num {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.callout-big-num span {
+  font-size: 18px;
+  color: var(--teal-light);
+  letter-spacing: 0;
+}
+
+.callout-big-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+.callout-big-label strong { color: var(--teal-light); }
+
+.callout-small {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+.callout-small-val {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--critical);
+  margin-bottom: 6px;
+}
+
+.callout-small-label {
+  font-size: 12.5px;
+  color: #991b1b;
+  line-height: 1.5;
+}
+
+/* ── PRICING ─────────────────────────────────────────────────────────────── */
+.pricing {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-glow {
+  position: absolute;
+  bottom: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(13,148,136,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 56px;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.price-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  transition: all 0.25s;
+}
+
+.price-card:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-2px);
+}
+
+.price-card.featured {
+  background: rgba(13,148,136,0.1);
+  border-color: rgba(13,148,136,0.4);
+  box-shadow: 0 0 0 1px rgba(13,148,136,0.15), 0 24px 48px rgba(0,0,0,0.2);
+}
+
+.price-tier {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+}
+
+.price-card.featured .price-tier { color: var(--teal-light); }
+
+.price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.price-dollar {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.price-period { font-size: 14px; color: rgba(255,255,255,0.4); }
+
+.price-annual {
+  font-size: 12px;
+  color: var(--teal-light);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.price-target {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.price-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+
+.price-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+
+.check { color: var(--teal-light); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.price-card.featured .check { color: var(--teal-light); }
+
+.price-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+}
+
+.price-btn-ghost {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.price-btn-ghost:hover { background: rgba(255,255,255,0.12); color: white; }
+
+.price-btn-teal {
+  background: var(--teal);
+  color: white;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.35);
+}
+
+.price-btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+.pricing-note {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 24px;
+}
+
+/* ── WHO IT'S FOR ────────────────────────────────────────────────────────── */
+.who { background: var(--surface); }
+
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+
+.who-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.25s;
+  box-shadow: var(--shadow);
+}
+
+.who-card:hover {
+  border-color: var(--teal);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(13,148,136,0.12);
+}
+
+.who-icon {
+  width: 52px; height: 52px;
+  background: var(--teal-pale);
+  border: 1px solid rgba(13,148,136,0.2);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.who-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--teal); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.who-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.who-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.who-desc { font-size: 12px; color: var(--ink-muted); line-height: 1.55; }
+
+/* ── FINAL CTA ───────────────────────────────────────────────────────────── */
+.final-cta {
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-soft) 100%);
+  padding: 120px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(13,148,136,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.final-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.final-cta h2 span { color: var(--teal-light); }
+
+.final-cta p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  max-width: 520px;
+  margin: 0 auto 44px;
+  line-height: 1.65;
+  position: relative;
+}
+
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.cta-fine {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 20px;
+  position: relative;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy-deep);
+  padding: 56px 48px 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 32px;
+}
+
+.footer-brand p {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.65;
+  margin-top: 16px;
+  max-width: 280px;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover { color: white; }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+/* ── SCROLL ANIMATIONS ───────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* Hero entrance */
+.hero-content { animation: heroIn 0.8s ease both; }
+.hero-mockup { animation: heroIn 0.8s 0.2s ease both; }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <span class="nav-brand">HIPAA<span>Works</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#who">Who It's For</a></li>
+    <li><a href="pitch">Pitch Deck</a></li>
+    <li><a href="dashboard" class="nav-demo">View Demo →</a></li>
+    <li><a href="#pricing" class="nav-cta">Start Your Assessment →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-top-line"></div>
+
+  <div class="hero-inner container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        <span>2026 HIPAA Security Rule Update</span>
+      </div>
+
+      <h1 class="hero-h1">
+        HIPAA compliance that tells you<br>
+        <em>exactly what to do</em><br>
+        with the tools you have.
+      </h1>
+
+      <p class="hero-sub">
+        Every competitor gives you a gap report. HIPAAWorks gives you
+        <strong>platform-specific, step-by-step remediation</strong> built around
+        your actual technology stack. Not "you need MFA." The exact
+        Conditional Access policy to enable in your Microsoft 365 tenant.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">
+          Start Free Assessment
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="#how" class="btn-ghost-light">See how it works</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val" style="color: #f87171;">86%</div>
+          <div class="hero-stat-label">of practices fail OCR's risk analysis audit</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" style="color: var(--teal-light);">$89</div>
+          <div class="hero-stat-label">per month vs. $65K–$500K breach cost</div>
+        </div>
+        <div>
+          <div class="hero-stat-val" style="color: #fb923c;">240d</div>
+          <div class="hero-stat-label">compliance window after the 2026 final rule</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-mockup">
+      <div class="mockup-frame">
+        <div class="mockup-bar">
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+          <div class="mockup-dot"></div>
+          <div class="mockup-url">hipaaworks.com/dashboard</div>
+        </div>
+        <div class="mockup-body">
+          <div class="mini-dash">
+            <div class="mini-alert">
+              <div class="mini-alert-icon">
+                <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="mini-alert-text">
+                <div class="mini-alert-title">2026 Rule Update — Action Required</div>
+                <div class="mini-alert-sub">3 controls now mandatory · ~240 days to comply</div>
+              </div>
+              <div class="mini-alert-btn">Review →</div>
+            </div>
+
+            <div class="mini-kpis">
+              <div class="mini-kpi alert">
+                <div class="mini-kpi-label">Critical Gaps</div>
+                <div class="mini-kpi-val">3</div>
+                <div class="mini-kpi-sub">Immediate action</div>
+              </div>
+              <div class="mini-kpi">
+                <div class="mini-kpi-label">Open Gaps</div>
+                <div class="mini-kpi-val" style="color:#fb923c;">7</div>
+                <div class="mini-kpi-sub">4 in progress</div>
+              </div>
+              <div class="mini-kpi">
+                <div class="mini-kpi-label">Remediation</div>
+                <div class="mini-kpi-val" style="color:#34d399;">58%</div>
+                <div class="mini-kpi-sub">On track</div>
+              </div>
+              <div class="mini-kpi">
+                <div class="mini-kpi-label">Next Due</div>
+                <div class="mini-kpi-val" style="color:var(--teal-light); font-size:14px; font-family:var(--sans);">47d</div>
+                <div class="mini-kpi-sub">Jul 7, 2026</div>
+              </div>
+            </div>
+
+            <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.8px;text-transform:uppercase;padding:2px 0;">Open Gaps</div>
+
+            <div class="mini-gaps">
+              <div class="mini-gap-item">
+                <div class="mini-dot dot-c"></div>
+                <div class="mini-gap-text">MFA not enforced across all ePHI systems</div>
+                <div class="mini-tag tag-teal">M365 fix</div>
+              </div>
+              <div class="mini-gap-item">
+                <div class="mini-dot dot-c"></div>
+                <div class="mini-gap-text">ePHI not encrypted at rest on workstations</div>
+                <div class="mini-tag tag-teal">BitLocker</div>
+              </div>
+              <div class="mini-gap-item">
+                <div class="mini-dot dot-h"></div>
+                <div class="mini-gap-text">Missing BAA with billing vendor</div>
+                <div class="mini-tag tag-orange">In progress</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BANNER -->
+<div class="urgency">
+  <div class="urgency-inner container">
+    <div class="urgency-badge">Rule Update</div>
+    <p class="urgency-text">
+      <strong>The 2026 HIPAA Security Rule eliminates addressable safeguards.</strong>
+      MFA, encryption, annual penetration testing, and 72-hour incident response are now mandatory for every covered entity — regardless of size.
+    </p>
+    <a href="#how" class="urgency-cta">
+      See what changes
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-grid reveal">
+    <div class="stat-block">
+      <div class="stat-num" style="color: var(--critical);">86<span style="font-size:32px;">%</span></div>
+      <div class="stat-desc">of covered entities failed OCR's risk analysis audit when examined</div>
+      <div class="stat-source">Source: OCR HIPAA Audits Industry Report, 2020</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" style="color: var(--high);">1 in 3</div>
+      <div class="stat-desc">breached small practices close permanently within two years</div>
+      <div class="stat-source">Source: GlobalRPH Independent Practice Research, 2026</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num" style="color: var(--teal);">98<span style="font-size:32px;">%</span></div>
+      <div class="stat-desc">of small practices believe they're compliant — while operating with dangerous gaps</div>
+      <div class="stat-source">Source: Paubox Survey of Small Healthcare Organizations, 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-h2">The compliance gap isn't<br>awareness. It's translation.</h2>
+
+    <div class="problem-grid">
+      <div class="reveal">
+        <p class="problem-quote">
+          A six-person PT clinic that learns it needs MFA still doesn't know how to implement it in their specific
+          <em>Microsoft 365 tenant</em>. That last mile — from knowing to doing — is where every compliance program goes to die.
+        </p>
+        <p style="margin-top: 24px; font-size: 15px; color: var(--ink-muted); line-height: 1.65;">
+          The OCR's free tool is a 200-question document designed for compliance professionals. SaaS platforms tell you what's wrong in generic terms. Consultants charge $5,000–$15,000 for a report you file and can't act on.
+        </p>
+        <p style="margin-top: 16px; font-size: 15px; color: var(--ink-muted); line-height: 1.65;">
+          None of them know what software you use. None of them can tell you what to click.
+        </p>
+      </div>
+
+      <div class="problem-items reveal reveal-delay-2">
+        <div class="problem-item">
+          <div class="problem-icon pi-red">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="problem-item-title">Generic guidance nobody can act on</div>
+            <div class="problem-item-desc">"Implement MFA" is not a remediation plan. "Here's the exact Conditional Access policy for your M365 E3 tenant" is.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon pi-orange">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <div class="problem-item-title">Reports that don't hold up under scrutiny</div>
+            <div class="problem-item-desc">Compliance scores have no legal standing with OCR. The only defensible output is a documented, self-attested risk analysis.</div>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon pi-yellow">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="problem-item-title">Annual assessments that don't stay current</div>
+            <div class="problem-item-desc">The 2026 rule requires annual reassessments, biannual vulnerability scans, and continuous monitoring as rules evolve.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-glow"></div>
+  <div class="container">
+    <div class="section-label" style="color: var(--teal-light);">How It Works</div>
+    <h2 class="section-h2 light">Five steps. No IT department required.</h2>
+    <p class="section-sub light">Built for a practice manager, not a compliance officer. Every question answerable without technical expertise.</p>
+
+    <div class="how-steps reveal">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div class="how-step-title">Technology Profile Intake</div>
+        <div class="how-step-desc">Tell us your EHR, email platform, billing vendor, and devices. This drives everything downstream.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div class="how-step-title">Adaptive Risk Assessment</div>
+        <div class="how-step-desc">Guided questionnaire scoped to your specific environment. Plain language throughout.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div class="how-step-title">Severity-Tiered Gap Report</div>
+        <div class="how-step-desc">Critical, High, Medium. No scores. No false precision. Each gap tagged to the specific HIPAA control.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div class="how-step-title">Platform-Specific Guidance</div>
+        <div class="how-step-desc">Step-by-step instructions for the tools you already own. Written for someone without an IT background.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <div class="how-step-title">OCR-Ready Documentation</div>
+        <div class="how-step-desc">PDF risk analysis with proper attestation framing. Annual reminders and rule update alerts keep you current.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="diff">
+  <div class="container">
+    <div class="section-label">Why HIPAAWorks</div>
+    <h2 class="section-h2">Three things no competitor offers simultaneously.</h2>
+    <p class="section-sub">Each one matters. Together, they make the platform genuinely difficult to replicate.</p>
+
+    <div class="diff-grid">
+      <div class="diff-card reveal">
+        <div class="diff-num">01</div>
+        <div class="diff-title">Technology-Profile-Aware Remediation</div>
+        <div class="diff-body">At onboarding, HIPAAWorks captures your actual technology stack. Every recommendation maps to the tools you already own — not generic best practices applicable to no one.</div>
+        <div class="diff-example">"Enable Conditional Access in your Microsoft 365 E3 tenant — here's the exact policy."</div>
+      </div>
+      <div class="diff-card reveal reveal-delay-2">
+        <div class="diff-num">02</div>
+        <div class="diff-title">AI That Closes the Translation Gap</div>
+        <div class="diff-body">The Claude API reasons about your specific combination of technology, practice size, and regulatory requirement. Consulting-depth guidance at $89–$149/month, without a consultant.</div>
+        <div class="diff-example">A practice on WebPT with M365 E3 gets different guidance than one on athenahealth with Google Workspace. Always.</div>
+      </div>
+      <div class="diff-card reveal reveal-delay-4">
+        <div class="diff-num">03</div>
+        <div class="diff-title">Attestation Framing That Holds Up Legally</div>
+        <div class="diff-body">HIPAAWorks produces no compliance scores — ever. OCR doesn't recognize a passing score. Output is framed as your organization's documented, self-attested risk analysis. The structure OCR expects.</div>
+        <div class="diff-example">Competitors who produce scores create liability for their customers. We don't.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT NOT COMPLYING COSTS -->
+<section class="cost">
+  <div class="container">
+    <div class="section-label">The Risk</div>
+    <h2 class="section-h2">What a breach actually costs a small practice.</h2>
+    <p class="section-sub">These aren't hospital numbers. These are documented costs borne by practices generating $500,000–$2M in annual revenue.</p>
+
+    <div class="cost-inner reveal">
+      <div>
+        <div class="cost-table">
+          <div class="cost-table-head">
+            <span>Cost Category</span>
+            <span>Small Practice Range</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-cat">Ransom demand</span>
+            <span class="cost-range">$10,000 – $50,000</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-cat">IT forensics &amp; remediation</span>
+            <span class="cost-range">$25,000 – $150,000</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-cat">OCR civil monetary penalty</span>
+            <span class="cost-range">$15,000 – $250,000</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-cat">Legal fees</span>
+            <span class="cost-range">$10,000 – $50,000</span>
+          </div>
+          <div class="cost-row">
+            <span class="cost-cat">Breach notification costs</span>
+            <span class="cost-range">$5,000 – $20,000</span>
+          </div>
+          <div class="cost-row total">
+            <span class="cost-cat">Probable total event cost</span>
+            <span class="cost-range">$65,000 – $500,000</span>
+          </div>
+        </div>
+        <p style="font-size: 12px; color: var(--ink-muted); margin-top: 12px; line-height: 1.6;">
+          Sources: OCR Resolution Agreements; GlobalRPH Independent Practice Research 2026; small business breach cost data.
+          Practices that had no prior risk analysis consistently face higher penalties.
+        </p>
+      </div>
+
+      <div class="cost-callout">
+        <div class="callout-big">
+          <div class="callout-big-num">
+            $89<span>/mo</span>
+          </div>
+          <div class="callout-big-label">
+            vs. <strong>$65,000–$500,000</strong> in breach costs.<br>
+            The math isn't close.
+          </div>
+        </div>
+        <div class="callout-small">
+          <div class="callout-small-val">1 in 3</div>
+          <div class="callout-small-label">
+            breached small practices close permanently within two years of a breach.
+            Not fined. Not disrupted. Closed.
+          </div>
+        </div>
+        <a href="#pricing" class="btn-primary" style="justify-content: center;">
+          Start Your Assessment
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-glow"></div>
+  <div class="container" style="text-align: center;">
+    <div class="section-label" style="color: var(--teal-light); justify-content: center;">Pricing</div>
+    <h2 class="section-h2 light">Straightforward pricing. No per-seat fees. No hidden costs.</h2>
+    <p class="section-sub light" style="margin: 0 auto;">Annual billing is the default — and it saves 10%. Both tiers include a full security risk assessment, OCR-ready PDF output, and ongoing monitoring.</p>
+  </div>
+
+  <div class="pricing-grid reveal">
+    <div class="price-card">
+      <div class="price-tier">Core</div>
+      <div class="price-amount">
+        <span class="price-dollar">$89</span>
+        <span class="price-period">/mo</span>
+      </div>
+      <div class="price-annual">$79/mo billed annually</div>
+      <div class="price-target">Solo and 1–5 staff practices</div>
+      <div class="price-features">
+        <div class="price-feature"><span class="check">✓</span> Full Security Rule SRA</div>
+        <div class="price-feature"><span class="check">✓</span> OCR-ready PDF risk analysis</div>
+        <div class="price-feature"><span class="check">✓</span> Severity-tiered gap report</div>
+        <div class="price-feature"><span class="check">✓</span> Platform-specific remediation (standard)</div>
+        <div class="price-feature"><span class="check">✓</span> Physical safeguard documentation module</div>
+        <div class="price-feature"><span class="check">✓</span> Annual reassessment reminders</div>
+      </div>
+      <a href="#" class="price-btn price-btn-ghost">Get Started</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-tier">Pro</div>
+      <div class="price-amount">
+        <span class="price-dollar">$149</span>
+        <span class="price-period">/mo</span>
+      </div>
+      <div class="price-annual">$129/mo billed annually</div>
+      <div class="price-target">5–20 staff, more complexity</div>
+      <div class="price-features">
+        <div class="price-feature"><span class="check">✓</span> Everything in Core</div>
+        <div class="price-feature"><span class="check">✓</span> Full AI remediation engine (deep guidance)</div>
+        <div class="price-feature"><span class="check">✓</span> Remediation tracking &amp; workflow</div>
+        <div class="price-feature"><span class="check">✓</span> BAA vendor tracking</div>
+        <div class="price-feature"><span class="check">✓</span> Multi-user access</div>
+        <div class="price-feature"><span class="check">✓</span> Rule update monitoring &amp; alerts</div>
+      </div>
+      <a href="#" class="price-btn price-btn-teal">Get Started</a>
+    </div>
+  </div>
+
+  <p class="pricing-note">Start with a free assessment — complete a real SRA, get a real gap report, then decide. No credit card required.</p>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who" id="who">
+  <div class="container">
+    <div class="section-label">Who It's For</div>
+    <h2 class="section-h2">Built for practices of 1–20 people<br>with no compliance department.</h2>
+
+    <div class="who-grid">
+      <div class="who-card reveal">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="who-title">Physician Practices</div>
+        <div class="who-count">80,000–120,000 independent practices</div>
+        <div class="who-desc">Solo and small-group practices operating outside health system ownership. Compliance-aware, resource-constrained.</div>
+      </div>
+      <div class="who-card reveal reveal-delay-1">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="who-title">Dental Practices</div>
+        <div class="who-count">80,000–90,000 independent practices</div>
+        <div class="who-desc">High technology surface area — EHR, imaging, billing, patient communication. All of it covered.</div>
+      </div>
+      <div class="who-card reveal reveal-delay-2">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="who-title">PT &amp; OT Clinics</div>
+        <div class="who-count">45,000–50,000 independent clinics</div>
+        <div class="who-desc">Highly fragmented, WebPT-centric, and among the most compliance-under-resourced practices in the country.</div>
+      </div>
+      <div class="who-card reveal reveal-delay-3">
+        <div class="who-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <div class="who-title">Behavioral Health</div>
+        <div class="who-count">150,000–250,000 private practices</div>
+        <div class="who-desc">The fastest-growing and most fragmented segment. Solo therapists to group practices, all with the same legal obligations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="cta-glow"></div>
+  <h2>
+    Stop guessing.<br>
+    Start <span>knowing exactly what to fix</span>.
+  </h2>
+  <p>
+    Start with a free assessment. Complete a real HIPAA Security Risk Analysis, get a real gap report,
+    and see platform-specific guidance built for your tools — before you pay a dollar.
+  </p>
+  <div class="cta-buttons">
+    <a href="#pricing" class="btn-primary" style="font-size: 15px; padding: 16px 32px;">
+      Start Free Assessment
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <a href="#how" class="btn-ghost-light" style="font-size: 15px; padding: 16px 28px;">
+      See how it works
+    </a>
+  </div>
+  <p class="cta-fine">No credit card required · Annual or monthly billing · Cancel anytime</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">
+        <div class="nav-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <span class="nav-brand">HIPAA<span>Works</span></span>
+      </a>
+      <p>HIPAA Security Rule compliance for small healthcare practices. Technology-aware remediation that tells you exactly what to do with the tools you already own.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Product</div>
+      <div class="footer-links">
+        <a href="#">How It Works</a>
+        <a href="#">Pricing</a>
+        <a href="#">Security</a>
+        <a href="#">2026 Rule Update</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Who It's For</div>
+      <div class="footer-links">
+        <a href="#">Physician Practices</a>
+        <a href="#">Dental Offices</a>
+        <a href="#">PT &amp; OT Clinics</a>
+        <a href="#">Behavioral Health</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a href="#">hipaaworks.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Passing Lanes Solutions LLC. All rights reserved. HIPAAWorks is a product of Passing Lanes Solutions LLC.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Security</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}, { passive: true });
+
+// Start scrolled (page loads with content already in viewport)
+nav.classList.add('scrolled');
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
