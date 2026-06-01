@@ -45,7 +45,6 @@
 
     .page { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
 
-    /* Topbar */
     .topbar { border-bottom: 1px solid #141418; padding: 0 28px; height: 46px; display: flex; align-items: center; justify-content: space-between; }
     .topbar-brand { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: #f59e0b; text-transform: uppercase; }
     .topbar-status { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #3a3a48; letter-spacing: 0.08em; }
@@ -53,7 +52,6 @@
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
     .topbar-url { font-size: 10px; color: #3a3a48; letter-spacing: 0.06em; }
 
-    /* Main */
     main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 76px 24px 80px; }
 
     @keyframes rise {
@@ -75,68 +73,149 @@
     .tagline { font-size: 13px; font-weight: 300; color: #5a5868; line-height: 1.75; text-align: center; max-width: 420px; margin-bottom: 52px; }
     .tagline em { font-style: normal; color: #8a8898; }
 
-    /* Widget shell */
-    .widget {
-      width: 100%; max-width: 400px;
-      background: #0f0f14; border: 1px solid #1c1c24;
-      border-radius: 14px; overflow: hidden; margin-bottom: 44px;
-      box-shadow: 0 0 0 1px rgba(245,158,11,0.07), 0 4px 12px rgba(0,0,0,0.4), 0 24px 64px rgba(0,0,0,0.65);
+    /* ── CAROUSEL ── */
+    .carousel {
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 44px;
       position: relative;
     }
-    .widget::before {
-      content: ''; position: absolute;
-      top: 0; left: 15%; right: 15%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.55), transparent);
-      z-index: 1;
+
+    .carousel-track {
+      position: relative;
+      width: 100%;
     }
 
-    /* Widget header */
-    .w-head { padding: 12px 16px; border-bottom: 1px solid #181820; background: #0c0c10; display: flex; align-items: center; justify-content: space-between; }
-    .w-brand { display: flex; align-items: center; gap: 7px; }
-    .w-dot { width: 6px; height: 6px; border-radius: 50%; background: #f59e0b; box-shadow: 0 0 7px rgba(245,158,11,0.65); animation: blink 2.4s ease-in-out infinite; }
-    .w-name { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; color: #a0a0b0; text-transform: uppercase; }
-    .w-pill { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #f59e0b; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.22); padding: 3px 8px; border-radius: 4px; }
-
-    /* Widget body */
-    .w-body { padding: 16px 16px 14px; }
-
-    /* Service section */
-    .svc-section { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #181820; }
-    .svc-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-
-    .svc-header { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #606070; margin-bottom: 9px; }
-
-    /* Data row: label | bar | pct */
-    .svc-row { display: grid; grid-template-columns: 44px 1fr 28px; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .svc-row:last-of-type { margin-bottom: 0; }
-
-    .row-label { font-size: 9px; color: #40404e; letter-spacing: 0.06em; }
-
-    .row-track { height: 3px; background: #18182a; border-radius: 2px; overflow: hidden; }
-    .svc-fill { height: 100%; border-radius: 2px; width: 0; transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1); }
-    .f-green { background: #34d399; }
-    .f-amber { background: #f59e0b; }
-    .f-red   { background: #f87171; }
-
-    .svc-pct { font-size: 10px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
-    .p-green { color: #34d399; }
-    .p-amber { color: #f59e0b; }
-    .p-red   { color: #f87171; }
-
-    /* Per-service next reset */
-    .svc-reset {
-      display: flex; align-items: center; gap: 5px;
-      margin-top: 9px;
-      font-size: 9px; letter-spacing: 0.06em;
+    .carousel-slide {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      animation: fadeSlide 0.4s ease;
     }
-    .svc-reset-label { color: #38384a; }
-    .svc-reset-sep   { color: #28283a; }
-    .svc-reset-time  { color: #5c5c72; font-weight: 500; font-variant-numeric: tabular-nums; }
+    .carousel-slide.active { display: flex; }
 
-    /* Warning */
-    .w-warn { padding: 8px 16px; border-top: 1px solid #181820; background: rgba(245,158,11,0.05); display: flex; align-items: center; gap: 6px; }
-    .warn-icon { font-size: 10px; color: #f59e0b; flex-shrink: 0; }
-    .warn-text { font-size: 9px; color: #8a6828; letter-spacing: 0.04em; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-label {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #38384a;
+    }
+
+    /* ── iOS FRAME ── */
+    .ios-frame {
+      width: 220px;
+      background: #000;
+      border-radius: 34px;
+      padding: 9px;
+      border: 1px solid #2a2a2a;
+    }
+    .ios-screen {
+      border-radius: 26px;
+      overflow: hidden;
+      background: #1c1c1e;
+    }
+
+    /* ── MAC FRAME ── */
+    .mac-frame {
+      width: 100%;
+      background: #1e1e1e;
+      border-radius: 10px;
+      border: 1px solid #3a3a3a;
+      overflow: hidden;
+    }
+    .mac-titlebar {
+      background: #2a2a2a;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      padding: 0 11px;
+      gap: 6px;
+      border-bottom: 1px solid #111;
+    }
+    .mac-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mac-bg {
+      padding: 20px;
+      background: linear-gradient(150deg, #2a3f5a 0%, #1a2a40 50%, #111827 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── SHARED WIDGET STYLES ── */
+    .vq {
+      font-family: -apple-system, 'SF Pro Text', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .vq-ios {
+      background: #1c1c1e;
+      padding: 14px;
+      width: 100%;
+    }
+    .vq-mac {
+      background: rgba(30,30,40,0.82);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 13px;
+      padding: 14px;
+      width: 240px;
+    }
+    .vq-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .vq-title  { font-size: 14px; font-weight: 600; color: #fff; }
+    .risk-red  { font-size: 12px; font-weight: 500; color: #ff453a; }
+    .risk-mod  { font-size: 12px; font-weight: 500; color: #ff9f0a; }
+    .svc-block { margin-bottom: 10px; }
+    .svc-block:last-child { margin-bottom: 0; }
+    .svc-head  { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .svc-name  { font-size: 13px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 6px; }
+    .svc-icon  { width: 17px; height: 17px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; }
+    .icon-claude { background: rgba(255,255,255,0.18); color: #fff; }
+    .icon-codex  { background: #1a1a2e; border: 0.5px solid rgba(255,255,255,0.15); color: #bbb; }
+    .m-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
+    .m-label { font-size: 11px; color: rgba(255,255,255,0.5); }
+    .m-val   { font-size: 11px; font-weight: 600; color: #fff; }
+    .m-val.red { color: #ff453a; }
+    .bar-track { height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; margin-bottom: 3px; }
+    .bar-fill  { height: 100%; border-radius: 2px; }
+    .b-amber { background: #ff9f0a; }
+    .b-red   { background: #ff453a; }
+    .reset-txt { font-size: 10px; color: rgba(255,255,255,0.32); margin-bottom: 8px; }
+    .vq-divider { height: 0.5px; background: rgba(255,255,255,0.1); margin: 10px 0; }
+    .vq-footer  { text-align: center; padding-top: 8px; border-top: 0.5px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.25); font-weight: 500; margin-top: 10px; }
+
+    /* ── CAROUSEL CONTROLS ── */
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .carousel-btn {
+      background: none;
+      border: 1px solid #2a2a38;
+      color: #40404e;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .carousel-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+    .carousel-dots { display: flex; gap: 6px; }
+    .carousel-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #2a2a38;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .carousel-dot.active { background: #f59e0b; }
 
     /* Platform chips */
     .chips-wrap { text-align: center; }
@@ -144,16 +223,13 @@
     .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
     .chip { font-size: 10px; letter-spacing: 0.05em; color: #3e3e4e; border: 1px solid #1c1c24; padding: 4px 10px; border-radius: 20px; background: #0f0f14; }
 
-    /* Footer */
     footer { border-top: 1px solid #111116; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.08em; color: #28282e; }
     footer a { color: #3e3e4e; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: #f59e0b; }
 
-    /* Mobile */
     @media (max-width: 480px) {
       .topbar-status { display: none; }
       main { padding: 56px 16px 60px; }
-      .svc-row { grid-template-columns: 44px 1fr 28px; gap: 6px; }
       footer { padding: 16px; }
       footer span:last-child { display: none; }
     }
@@ -180,68 +256,110 @@
     </h1>
 
     <p class="tagline a3">
-      Know your AI usage before your tools cut you off. One clean view of your limits across <em>Claude, Codex,</em> and every tool you build with — from your Mac menu bar or phone.
+      Know your AI usage before your tools cut you off. One clean view of your limits across <em>Claude, Codex,</em> and every tool you build with — live on your Mac and iPhone.
     </p>
 
-    <div class="widget a4">
+    <!-- CAROUSEL -->
+    <div class="carousel a4">
+      <div class="carousel-track">
 
-      <div class="w-head">
-        <div class="w-brand">
-          <div class="w-dot"></div>
-          <span class="w-name">VibeQuota</span>
-        </div>
-        <div class="w-pill">Active</div>
-      </div>
-
-      <div class="w-body">
-
-        <!-- Claude -->
-        <div class="svc-section">
-          <div class="svc-header">Claude</div>
-          <div class="svc-row">
-            <div class="row-label">Session</div>
-            <div class="row-track"><div class="svc-fill f-amber" data-p="78"></div></div>
-            <div class="svc-pct p-amber" data-p="78">0%</div>
+        <!-- Slide 1: iPhone -->
+        <div class="carousel-slide active" id="slide-0">
+          <div class="ios-frame">
+            <div class="ios-screen">
+              <div class="vq vq-ios">
+                <div class="vq-header">
+                  <span class="vq-title">VibeQuota</span>
+                  <span class="risk-red">Limit Risk</span>
+                </div>
+                <div class="svc-block">
+                  <div class="svc-head">
+                    <span class="svc-name"><span class="svc-icon icon-claude">✦</span>Claude</span>
+                    <span class="risk-mod">Moderate</span>
+                  </div>
+                  <div class="m-row"><span class="m-label">Session</span><span class="m-val">29%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-amber" style="width:29%"></div></div>
+                  <div class="reset-txt">Resets Jun 1 at 10:19AM</div>
+                  <div class="m-row"><span class="m-label">Weekly</span><span class="m-val">57%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-amber" style="width:57%"></div></div>
+                  <div class="reset-txt">Resets Jun 2 at 12:00PM</div>
+                </div>
+                <div class="vq-divider"></div>
+                <div class="svc-block">
+                  <div class="svc-head">
+                    <span class="svc-name"><span class="svc-icon icon-codex">⊟</span>Codex</span>
+                    <span class="risk-red">Limit Risk</span>
+                  </div>
+                  <div class="m-row"><span class="m-label">Session</span><span class="m-val red">97%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-red" style="width:97%"></div></div>
+                  <div class="reset-txt">Resets 10:19 AM</div>
+                  <div class="m-row"><span class="m-label">Weekly</span><span class="m-val">52%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-amber" style="width:52%"></div></div>
+                  <div class="reset-txt">Resets Jun 7, 2026 at 8:23 AM</div>
+                </div>
+                <div class="vq-footer">VibeQuota</div>
+              </div>
+            </div>
           </div>
-          <div class="svc-row">
-            <div class="row-label">Weekly</div>
-            <div class="row-track"><div class="svc-fill f-green" data-p="52"></div></div>
-            <div class="svc-pct p-green" data-p="52">0%</div>
-          </div>
-          <div class="svc-reset">
-            <span class="svc-reset-label">Next reset</span>
-            <span class="svc-reset-sep">·</span>
-            <span class="svc-reset-time" id="claude-reset">1h 19m</span>
-          </div>
-        </div>
-
-        <!-- OpenAI Codex -->
-        <div class="svc-section">
-          <div class="svc-header">OpenAI Codex</div>
-          <div class="svc-row">
-            <div class="row-label">Session</div>
-            <div class="row-track"><div class="svc-fill f-green" data-p="38"></div></div>
-            <div class="svc-pct p-green" data-p="38">0%</div>
-          </div>
-          <div class="svc-row">
-            <div class="row-label">Weekly</div>
-            <div class="row-track"><div class="svc-fill f-green" data-p="22"></div></div>
-            <div class="svc-pct p-green" data-p="22">0%</div>
-          </div>
-          <div class="svc-reset">
-            <span class="svc-reset-label">Next reset</span>
-            <span class="svc-reset-sep">·</span>
-            <span class="svc-reset-time" id="codex-reset">5h 55m</span>
-          </div>
+          <div class="slide-label">iPhone Widget</div>
         </div>
 
+        <!-- Slide 2: macOS -->
+        <div class="carousel-slide" id="slide-1">
+          <div class="mac-frame">
+            <div class="mac-titlebar">
+              <div class="mac-dot" style="background:#ff5f57"></div>
+              <div class="mac-dot" style="background:#febc2e"></div>
+              <div class="mac-dot" style="background:#28c840"></div>
+            </div>
+            <div class="mac-bg">
+              <div class="vq vq-mac">
+                <div class="vq-header">
+                  <span class="vq-title">VibeQuota</span>
+                  <span class="risk-red">Limit Risk</span>
+                </div>
+                <div class="svc-block">
+                  <div class="svc-head">
+                    <span class="svc-name"><span class="svc-icon icon-claude">✦</span>Claude</span>
+                    <span class="risk-mod">Moderate</span>
+                  </div>
+                  <div class="m-row"><span class="m-label">Session</span><span class="m-val">29%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-amber" style="width:29%"></div></div>
+                  <div class="reset-txt">Resets Jun 1 at 10:19AM</div>
+                  <div class="m-row"><span class="m-label">Weekly</span><span class="m-val">57%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-amber" style="width:57%"></div></div>
+                  <div class="reset-txt">Resets Jun 2 at 12:00PM</div>
+                </div>
+                <div class="vq-divider"></div>
+                <div class="svc-block">
+                  <div class="svc-head">
+                    <span class="svc-name"><span class="svc-icon icon-codex">⊟</span>Codex</span>
+                    <span class="risk-red">Limit Risk</span>
+                  </div>
+                  <div class="m-row"><span class="m-label">Session</span><span class="m-val red">97%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-red" style="width:97%"></div></div>
+                  <div class="reset-txt">Resets 10:19 AM</div>
+                  <div class="m-row"><span class="m-label">Weekly</span><span class="m-val">52%</span></div>
+                  <div class="bar-track"><div class="bar-fill b-amber" style="width:52%"></div></div>
+                  <div class="reset-txt">Resets Jun 7, 2026 at 8:23 AM</div>
+                </div>
+                <div class="vq-footer">VibeQuota</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-label">macOS Desktop Widget</div>
+        </div>
+
       </div>
 
-      <div class="w-warn">
-        <span class="warn-icon">⚠</span>
-        <span class="warn-text">Claude session limit in ~1hr &nbsp;·&nbsp; 19.1%/hr</span>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="prev" aria-label="Previous">&#8592;</button>
+        <div class="carousel-dots">
+          <div class="carousel-dot active" data-i="0"></div>
+          <div class="carousel-dot" data-i="1"></div>
+        </div>
+        <button class="carousel-btn" id="next" aria-label="Next">&#8594;</button>
       </div>
-
     </div>
 
     <div class="chips-wrap a5">
@@ -266,44 +384,25 @@
 
 </div>
 <script>
-  // Animate bars
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.querySelectorAll('.svc-fill').forEach(el => {
-        el.style.width = el.dataset.p + '%';
-      });
-      document.querySelectorAll('.svc-pct').forEach(el => {
-        const target = parseInt(el.dataset.p);
-        let n = 0;
-        const step = target / 55;
-        const t = setInterval(() => {
-          n = Math.min(n + step, target);
-          el.textContent = Math.round(n) + '%';
-          if (n >= target) clearInterval(t);
-        }, 22);
-      });
-    }, 550);
-  });
+  let current = 0;
+  const total = 2;
 
-  // Format seconds as Xh Ym
-  function fmt(s) {
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
-    return h > 0 ? h + 'h ' + m + 'm' : m + 'm';
+  function goTo(n) {
+    document.getElementById('slide-' + current).classList.remove('active');
+    document.querySelectorAll('.carousel-dot')[current].classList.remove('active');
+    current = (n + total) % total;
+    document.getElementById('slide-' + current).classList.add('active');
+    document.querySelectorAll('.carousel-dot')[current].classList.add('active');
   }
 
-  // Live countdown for both services
-  let claudeSecs = 1 * 3600 + 19 * 60;
-  let codexSecs  = 5 * 3600 + 55 * 60;
-  const claudeEl = document.getElementById('claude-reset');
-  const codexEl  = document.getElementById('codex-reset');
+  document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+  document.querySelectorAll('.carousel-dot').forEach(dot => {
+    dot.addEventListener('click', () => goTo(parseInt(dot.dataset.i)));
+  });
 
-  setInterval(() => {
-    claudeSecs = claudeSecs > 0 ? claudeSecs - 1 : 0;
-    codexSecs  = codexSecs  > 0 ? codexSecs  - 1 : 0;
-    claudeEl.textContent = fmt(claudeSecs);
-    codexEl.textContent  = fmt(codexSecs);
-  }, 1000);
+  // Auto-advance every 5s
+  setInterval(() => goTo(current + 1), 5000);
 </script>
 </body>
 </html>
