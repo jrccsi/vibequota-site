@@ -50,7 +50,7 @@
     .topbar-status { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #3a3a48; letter-spacing: 0.08em; }
     .pulse { width: 5px; height: 5px; border-radius: 50%; background: #f59e0b; animation: blink 2.4s ease-in-out infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
-    .topbar-url { font-size: 10px; color: #3a3a48; letter-spacing: 0.06em; }
+    .topbar-url { font-size: 10px; color: #7a7a88; letter-spacing: 0.06em; }
 
     main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 76px 24px 80px; }
 
@@ -70,8 +70,8 @@
     .wm-vibe  { color: #f0eee8; }
     .wm-quota { color: #f59e0b; }
 
-    .tagline { font-size: 13px; font-weight: 300; color: #5a5868; line-height: 1.75; text-align: center; max-width: 420px; margin-bottom: 52px; }
-    .tagline em { font-style: normal; color: #8a8898; }
+    .tagline { font-size: 13px; font-weight: 400; color: #9a98a8; line-height: 1.75; text-align: center; max-width: 420px; margin-bottom: 52px; }
+    .tagline em { font-style: normal; color: #cfcdd8; }
 
     /* ── CAROUSEL ── */
     .carousel {
@@ -104,7 +104,7 @@
       font-size: 9px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #38384a;
+      color: #6a6a80;
     }
 
     /* ── iOS FRAME ── */
@@ -219,12 +219,12 @@
 
     /* Platform chips */
     .chips-wrap { text-align: center; }
-    .chips-label { font-size: 9px; letter-spacing: 0.2em; color: #28282e; text-transform: uppercase; margin-bottom: 10px; }
+    .chips-label { font-size: 9px; letter-spacing: 0.2em; color: #6a6a78; text-transform: uppercase; margin-bottom: 10px; }
     .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-    .chip { font-size: 10px; letter-spacing: 0.05em; color: #3e3e4e; border: 1px solid #1c1c24; padding: 4px 10px; border-radius: 20px; background: #0f0f14; }
+    .chip { font-size: 10px; letter-spacing: 0.05em; color: #8a8a9a; border: 1px solid #26262e; padding: 4px 10px; border-radius: 20px; background: #0f0f14; }
 
-    footer { border-top: 1px solid #111116; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.08em; color: #28282e; }
-    footer a { color: #3e3e4e; text-decoration: none; transition: color 0.15s; }
+    footer { border-top: 1px solid #111116; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.08em; color: #6a6a78; }
+    footer a { color: #8a8a9a; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: #f59e0b; }
     .footer-links { display: flex; gap: 16px; }
 
@@ -241,10 +241,6 @@
 
   <div class="topbar">
     <div class="topbar-brand">VibeQuota</div>
-    <div class="topbar-status">
-      <div class="pulse"></div>
-      <span>Private Beta</span>
-    </div>
     <div class="topbar-url">vibequota.com</div>
   </div>
 
@@ -382,7 +378,6 @@
     <span>Know your limits.</span>
     <span class="footer-links">
       <a href="/privacy.html">Privacy</a>
-      <a href="https://twitter.com/vibequota" target="_blank" rel="noopener">@vibequota</a>
     </span>
   </footer>
 
