@@ -70,6 +70,29 @@
     .wm-vibe  { color: #f0eee8; }
     .wm-quota { color: #f59e0b; }
 
+    .hero-motto {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: clamp(13px, 2.4vw, 16px);
+      font-weight: 500;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: #cfcdd8;
+      margin: -8px 0 28px;
+      text-align: center;
+    }
+    .hero-motto::before,
+    .hero-motto::after {
+      content: '';
+      height: 1px;
+      width: clamp(24px, 9vw, 56px);
+      background: linear-gradient(90deg, transparent, #f59e0b);
+    }
+    .hero-motto::after { transform: scaleX(-1); }
+    .hero-motto .accent { color: #f59e0b; }
+
     .tagline { font-size: 13px; font-weight: 400; color: #9a98a8; line-height: 1.75; text-align: center; max-width: 420px; margin-bottom: 52px; }
     .tagline em { font-style: normal; color: #cfcdd8; }
 
@@ -251,6 +274,8 @@
     <h1 class="wordmark a2">
       <span class="wm-vibe">Vibe</span><span class="wm-quota">Quota</span>
     </h1>
+
+    <div class="hero-motto a2">Know Your <span class="accent">Limits</span></div>
 
     <p class="tagline a3">
       Know your AI usage before your tools cut you off. One clean view of your <em>Claude</em> and <em>Codex</em> limits — live on your Mac and iPhone.
