@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — VibeQuota</title>
+  <meta name="description" content="Privacy Policy for VibeQuota — what we collect, how we use it, and the choices available to you.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23f59e0b'/><text x='16' y='23' text-anchor='middle' font-family='monospace' font-weight='900' font-size='15' fill='%23040200'>VQ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+
+    body {
+      background-color: #08080b;
+      color: #f0eee8;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100%;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.055) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    .page { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+    .topbar { border-bottom: 1px solid #141418; padding: 0 28px; height: 46px; display: flex; align-items: center; justify-content: space-between; }
+    .topbar-brand { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: #f59e0b; text-transform: uppercase; text-decoration: none; }
+    .topbar-back { font-size: 10px; color: #3a3a48; letter-spacing: 0.08em; text-decoration: none; transition: color 0.15s; }
+    .topbar-back:hover { color: #f59e0b; }
+
+    main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 64px 24px 80px; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .a1 { opacity: 0; animation: rise 0.5s ease 0.08s forwards; }
+    .a2 { opacity: 0; animation: rise 0.6s ease 0.16s forwards; }
+
+    .doc { width: 100%; max-width: 720px; }
+
+    .eyebrow { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: #f59e0b; margin-bottom: 18px; }
+
+    .doc-title { font-family: 'Space Mono', monospace; font-size: clamp(32px, 7vw, 46px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px; color: #f0eee8; }
+
+    .doc-meta { font-size: 12px; font-weight: 300; color: #5a5868; line-height: 1.9; margin-bottom: 14px; }
+    .doc-meta strong { color: #8a8898; font-weight: 500; }
+    .doc-meta a { color: #f59e0b; text-decoration: none; }
+    .doc-meta a:hover { text-decoration: underline; }
+
+    .effective { font-size: 11px; letter-spacing: 0.06em; color: #3a3a48; text-transform: uppercase; margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid #141418; }
+
+    .doc-intro { font-size: 14px; font-weight: 300; color: #b8b6ae; line-height: 1.85; margin-bottom: 44px; }
+
+    .doc h2 { font-size: 17px; font-weight: 600; color: #f59e0b; letter-spacing: 0.01em; margin: 40px 0 16px; }
+    .doc h3 { font-size: 13px; font-weight: 600; color: #f0eee8; letter-spacing: 0.02em; text-transform: uppercase; margin: 26px 0 12px; }
+    .doc p { font-size: 14px; font-weight: 300; color: #a8a6a0; line-height: 1.85; margin-bottom: 16px; }
+    .doc ul { list-style: none; margin: 0 0 16px; padding: 0; }
+    .doc li { font-size: 14px; font-weight: 300; color: #a8a6a0; line-height: 1.8; padding-left: 22px; position: relative; margin-bottom: 8px; }
+    .doc li::before { content: '—'; position: absolute; left: 0; color: #f59e0b; }
+    .doc a { color: #f59e0b; text-decoration: none; }
+    .doc a:hover { text-decoration: underline; }
+    .doc strong { color: #d8d6ce; font-weight: 500; }
+
+    .doc-sign { margin-top: 40px; padding-top: 28px; border-top: 1px solid #141418; font-size: 13px; font-weight: 300; color: #8a8898; line-height: 1.9; }
+    .doc-sign strong { color: #f0eee8; font-weight: 500; }
+
+    footer { border-top: 1px solid #111116; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.08em; color: #28282e; }
+    footer a { color: #3e3e4e; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: #f59e0b; }
+
+    @media (max-width: 480px) {
+      main { padding: 48px 18px 60px; }
+      footer { padding: 16px; }
+      footer span:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a class="topbar-brand" href="/">VibeQuota</a>
+    <a class="topbar-back" href="/">&#8592; Back to home</a>
+  </div>
+
+  <main>
+    <article class="doc">
+
+      <div class="eyebrow a1">Legal</div>
+      <h1 class="doc-title a2">Privacy Policy</h1>
+
+      <div class="doc-meta">
+        <strong>App Name:</strong> VibeQuota<br>
+        <strong>Developer:</strong> Passing Lane Solutions LLC<br>
+        <strong>Contact:</strong> <a href="mailto:info@vibequota.com">info@vibequota.com</a><br>
+        <strong>Website:</strong> <a href="https://www.vibequota.com">www.vibequota.com</a>
+      </div>
+
+      <div class="effective">Effective: June 8, 2026</div>
+
+      <p class="doc-intro">
+        VibeQuota is designed to help users monitor and understand their AI tool usage across supported services. This Privacy Policy explains what information VibeQuota collects, how that information is used, and the choices available to users.
+      </p>
+
+      <h2>1. Information We Collect</h2>
+      <p>VibeQuota is intended to collect only the information necessary to operate the app, sync usage information across your devices, support purchases, improve reliability, and provide customer support.</p>
+
+      <h3>Usage Data You Choose to Track</h3>
+      <p>VibeQuota may collect and store usage-related information about supported AI tools, such as Claude and Codex. This may include information such as usage counts, limits, reset times, quota status, timestamps, and related app state needed to display usage information in the app, menu bar, and widgets.</p>
+      <p>VibeQuota does not intentionally collect the content of your prompts, responses, files, source code, conversations, or other materials you submit to AI services.</p>
+
+      <h3>Device and App Information</h3>
+      <p>VibeQuota may collect limited technical information needed to operate and improve the app, such as app version, operating system version, device type, crash information, diagnostic logs, performance information, and error events.</p>
+
+      <h3>Purchase Information</h3>
+      <p>If you purchase a paid version, lifetime unlock, or other in-app purchase, purchase and subscription status may be processed through Apple and RevenueCat. This may include information such as product identifier, transaction status, entitlement status, purchase date, renewal or expiration status, and related purchase metadata.</p>
+      <p>VibeQuota does not collect or store your full payment card number. Payments are processed by Apple through the App Store.</p>
+
+      <h3>iCloud Sync Data</h3>
+      <p>If iCloud sync is enabled, VibeQuota may store app data in your private iCloud account using Apple&rsquo;s iCloud services. This allows your usage status and related app state to sync between your Apple devices.</p>
+
+      <h3>Support Communications</h3>
+      <p>If you contact us for support, we may collect the information you provide, such as your email address, message content, screenshots, logs, or other details you choose to send.</p>
+
+      <h2>2. How We Use Information</h2>
+      <p>We use information collected by VibeQuota to:</p>
+      <ul>
+        <li>Provide and operate the app.</li>
+        <li>Display usage status, quotas, limits, reset times, notifications, and widgets.</li>
+        <li>Sync app data across your devices when iCloud sync is enabled.</li>
+        <li>Manage purchases, trials, and paid entitlements.</li>
+        <li>Diagnose crashes, errors, and performance issues.</li>
+        <li>Improve app reliability, functionality, and user experience.</li>
+        <li>Respond to support requests.</li>
+        <li>Protect against misuse, fraud, or abuse.</li>
+        <li>Comply with legal obligations.</li>
+      </ul>
+      <p>We do not sell your personal information.</p>
+
+      <h2>3. Analytics and Diagnostics</h2>
+      <p>VibeQuota may use analytics and diagnostic tools to help understand app performance, identify crashes, detect errors, and improve reliability. These tools may process technical information such as app version, device type, operating system version, crash logs, performance events, and general app usage events.</p>
+      <p>Where possible, analytics and diagnostic information is limited, minimized, and not intended to include the contents of your AI prompts, responses, files, source code, or conversations.</p>
+
+      <h2>4. Third-Party Services</h2>
+      <p>VibeQuota may use third-party service providers to operate the app and related services. These may include:</p>
+      <ul>
+        <li><strong>Apple</strong> for App Store distribution, in-app purchases, iCloud, CloudKit, and device services.</li>
+        <li><strong>RevenueCat</strong> for purchase validation, entitlement management, and subscription or lifetime unlock status.</li>
+        <li><strong>Sentry</strong> for crash reporting and error diagnostics.</li>
+        <li><strong>PostHog</strong> for product analytics and app usage insights.</li>
+      </ul>
+      <p>These third-party providers may process information according to their own privacy policies and terms. We use these services only to support app functionality, purchases, diagnostics, analytics, and reliability.</p>
+
+      <h2>5. iCloud and Local Storage</h2>
+      <p>VibeQuota may store certain app data locally on your device. If iCloud sync is enabled, some app data may also be stored in your private iCloud account so it can sync across your devices.</p>
+      <p>Data stored in iCloud is handled by Apple under Apple&rsquo;s iCloud and privacy practices. You can manage iCloud availability and app access through your Apple device settings.</p>
+
+      <h2>6. Data We Do Not Intentionally Collect</h2>
+      <p>VibeQuota is not designed to collect:</p>
+      <ul>
+        <li>The text of your AI prompts.</li>
+        <li>AI-generated responses.</li>
+        <li>Source code or files you submit to AI tools.</li>
+        <li>Passwords or authentication credentials for AI services.</li>
+        <li>Payment card numbers.</li>
+        <li>Health, financial, biometric, or government identification information.</li>
+      </ul>
+      <p>If you voluntarily send sensitive information to us in a support request, we will use it only as needed to respond to your request and will take reasonable steps to limit further use.</p>
+
+      <h2>7. Data Sharing</h2>
+      <p>We may share information only in the following circumstances:</p>
+      <ul>
+        <li>With service providers that help us operate the app, process purchases, provide diagnostics, or perform analytics.</li>
+        <li>With Apple or RevenueCat as necessary to validate purchases and manage entitlements.</li>
+        <li>When required by law, legal process, or governmental request.</li>
+        <li>To protect the rights, safety, security, or integrity of users, the app, or our business.</li>
+        <li>In connection with a business transfer, such as a merger, acquisition, or sale of assets.</li>
+      </ul>
+      <p>We do not sell personal information. We do not share personal information for cross-context behavioral advertising.</p>
+
+      <h2>8. Data Retention</h2>
+      <p>We retain information only for as long as reasonably necessary to provide the app, support purchases, maintain security and reliability, respond to support requests, comply with legal obligations, and resolve disputes.</p>
+      <p>Usage data stored locally on your device remains under your control unless synced through iCloud. You may delete app data by using available app controls, disabling iCloud sync, deleting iCloud app data, or uninstalling the app.</p>
+      <p>Purchase records may be retained as needed to maintain entitlement status, comply with App Store requirements, support refunds or purchase restoration, and meet legal or accounting obligations.</p>
+
+      <h2>9. Your Choices and Controls</h2>
+      <p>Depending on your device settings and app configuration, you may be able to:</p>
+      <ul>
+        <li>Delete the app from your device.</li>
+        <li>Delete locally stored app data.</li>
+        <li>Disable iCloud sync for the app.</li>
+        <li>Manage iCloud data through Apple settings.</li>
+        <li>Restore or manage purchases through the App Store.</li>
+        <li>Contact us to request access, correction, or deletion of support-related information you provided directly to us.</li>
+      </ul>
+      <p>Some information, such as App Store purchase history, is managed by Apple and may need to be handled through your Apple account settings.</p>
+
+      <h2>10. Children&rsquo;s Privacy</h2>
+      <p>VibeQuota is not directed to children under 13 years old. We do not knowingly collect personal information from children under 13. If we learn that we have collected personal information from a child under 13 without appropriate consent, we will take reasonable steps to delete it.</p>
+
+      <h2>11. International Users</h2>
+      <p>VibeQuota may be used by individuals outside the United States. Information may be processed in the United States or other countries where we or our service providers operate. By using the app, you understand that information may be processed in jurisdictions that may have different data protection laws than your country of residence.</p>
+
+      <h2>12. California Privacy Notice</h2>
+      <p>If you are a California resident, you may have rights under California privacy laws, including the right to know, access, correct, delete, and limit certain uses of personal information, subject to applicable exceptions.</p>
+      <p>We do not sell personal information. We do not knowingly share personal information for cross-context behavioral advertising.</p>
+      <p>To submit a privacy request, contact us at: <a href="mailto:info@vibequota.com">info@vibequota.com</a>.</p>
+
+      <h2>13. Security</h2>
+      <p>We use reasonable administrative, technical, and organizational safeguards designed to protect information processed by VibeQuota. However, no method of storage or transmission is completely secure, and we cannot guarantee absolute security.</p>
+      <p>Users should also protect their own devices, Apple ID, iCloud account, and App Store account credentials.</p>
+
+      <h2>14. Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time. If we make material changes, we will update the effective date above and may provide additional notice where appropriate.</p>
+      <p>Your continued use of VibeQuota after an updated Privacy Policy becomes effective means you accept the updated policy.</p>
+
+      <h2>15. Contact Us</h2>
+      <p>If you have questions about this Privacy Policy or VibeQuota&rsquo;s privacy practices, contact us at:</p>
+      <div class="doc-sign">
+        <strong>Passing Lane Solutions LLC</strong><br>
+        Email: <a href="mailto:info@vibequota.com">info@vibequota.com</a><br>
+        Website: <a href="https://www.vibequota.com">www.vibequota.com</a>
+      </div>
+
+    </article>
+  </main>
+
+  <footer>
+    <span>© 2025 PassingLane Solutions LLC</span>
+    <span>Know your limits.</span>
+    <a href="/">Home</a>
+  </footer>
+
+</div>
+</body>
+</html>

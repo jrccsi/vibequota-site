@@ -226,12 +226,13 @@
     footer { border-top: 1px solid #111116; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.08em; color: #28282e; }
     footer a { color: #3e3e4e; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: #f59e0b; }
+    .footer-links { display: flex; gap: 16px; }
 
     @media (max-width: 480px) {
       .topbar-status { display: none; }
       main { padding: 56px 16px 60px; }
       footer { padding: 16px; }
-      footer span:last-child { display: none; }
+      footer > span:nth-child(2) { display: none; }
     }
   </style>
 </head>
@@ -379,7 +380,10 @@
   <footer>
     <span>© 2025 PassingLane Solutions LLC</span>
     <span>Know your limits.</span>
-    <a href="https://twitter.com/vibequota" target="_blank" rel="noopener">@vibequota</a>
+    <span class="footer-links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="https://twitter.com/vibequota" target="_blank" rel="noopener">@vibequota</a>
+    </span>
   </footer>
 
 </div>
