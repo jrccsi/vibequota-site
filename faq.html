@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeQuota — FAQ</title>
+  <meta name="description" content="Frequently asked questions about VibeQuota — the AI usage monitor for Claude and Codex on Mac and iPhone.">
+  <meta property="og:title" content="VibeQuota — FAQ">
+  <meta property="og:description" content="Answers about VibeQuota: setup, sync, widgets, privacy, and more.">
+  <meta property="og:url" content="https://vibequota.com/faq.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23f59e0b'/><text x='16' y='23' text-anchor='middle' font-family='monospace' font-weight='900' font-size='15' fill='%23040200'>VQ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; scroll-behavior: smooth; }
+
+    body {
+      background-color: #08080b;
+      color: #f0eee8;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100%;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.055) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    .page { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+    .topbar { border-bottom: 1px solid #141418; padding: 0 28px; height: 46px; display: flex; align-items: center; justify-content: space-between; }
+    .topbar-brand { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: #f59e0b; text-transform: uppercase; text-decoration: none; }
+    .topbar-url { font-size: 10px; color: #7a7a88; letter-spacing: 0.06em; text-decoration: none; }
+    .topbar-url:hover { color: #f59e0b; }
+
+    main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 64px 24px 80px; }
+
+    .eyebrow { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: #f59e0b; margin-bottom: 18px; text-align: center; }
+    .title { font-family: 'Space Mono', monospace; font-size: clamp(36px, 8vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; text-align: center; margin-bottom: 18px; }
+    .intro { font-size: 13px; font-weight: 400; color: #9a98a8; line-height: 1.75; text-align: center; max-width: 540px; margin: 0 auto 18px; }
+    .disclaimer { font-size: 11px; color: #6a6a78; line-height: 1.7; text-align: center; max-width: 540px; margin: 0 auto 48px; }
+
+    /* Section nav */
+    .toc { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 56px; }
+    .toc a { font-size: 10px; letter-spacing: 0.05em; color: #8a8a9a; border: 1px solid #26262e; padding: 5px 12px; border-radius: 20px; background: #0f0f14; text-decoration: none; transition: border-color 0.15s, color 0.15s; }
+    .toc a:hover { border-color: #f59e0b; color: #f59e0b; }
+
+    .section { margin-bottom: 44px; scroll-margin-top: 24px; }
+    .section-title { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #f59e0b; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #1a1a20; }
+
+    details {
+      border-bottom: 1px solid #141418;
+    }
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 36px 16px 0;
+      position: relative;
+      font-size: 14px;
+      font-weight: 500;
+      color: #e8e6e0;
+      line-height: 1.5;
+      transition: color 0.15s;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary:hover { color: #f59e0b; }
+    details summary::after {
+      content: '+';
+      position: absolute;
+      right: 6px; top: 14px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #6a6a78;
+      transition: transform 0.2s, color 0.15s;
+    }
+    details[open] summary::after { content: '−'; color: #f59e0b; }
+    details[open] summary { color: #f0eee8; }
+    .answer {
+      padding: 0 36px 20px 0;
+      font-size: 13px;
+      font-weight: 300;
+      color: #b4b2c0;
+      line-height: 1.8;
+    }
+    .answer p { margin-bottom: 10px; }
+    .answer p:last-child { margin-bottom: 0; }
+    .answer ul { margin: 8px 0 10px; padding-left: 18px; }
+    .answer li { margin-bottom: 5px; }
+    .answer strong { color: #e8e6e0; font-weight: 600; }
+    .answer code { font-size: 12px; background: #14141a; border: 1px solid #22222a; border-radius: 4px; padding: 1px 6px; color: #f59e0b; }
+    .answer .path { display: inline-block; }
+    .answer a { color: #f59e0b; text-decoration: none; }
+    .answer a:hover { text-decoration: underline; }
+
+    .back { text-align: center; margin-top: 48px; }
+    .back a { font-size: 12px; letter-spacing: 0.08em; color: #8a8a9a; text-decoration: none; border: 1px solid #26262e; padding: 9px 20px; border-radius: 22px; transition: border-color 0.15s, color 0.15s; }
+    .back a:hover { border-color: #f59e0b; color: #f59e0b; }
+
+    footer { border-top: 1px solid #111116; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: 0.08em; color: #6a6a78; }
+    footer a { color: #8a8a9a; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: #f59e0b; }
+    .footer-links { display: flex; gap: 16px; }
+
+    @media (max-width: 480px) {
+      main { padding: 48px 16px 60px; }
+      footer { padding: 16px; }
+      footer > span:nth-child(2) { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a class="topbar-brand" href="/">VibeQuota</a>
+    <a class="topbar-url" href="/">← Home</a>
+  </div>
+
+  <main>
+
+    <div class="eyebrow">Help Center</div>
+    <h1 class="title">FAQ</h1>
+    <p class="intro">
+      VibeQuota is a native Mac and iPhone app for monitoring your Claude and Codex usage. The Mac app collects your usage and is the source of truth; the iPhone app and widgets show the latest data synced through your own private iCloud account.
+    </p>
+    <p class="disclaimer">
+      VibeQuota is independent. It is not affiliated with, endorsed by, or officially connected to OpenAI, Anthropic, Google, or any other AI provider.
+    </p>
+
+    <nav class="toc">
+      <a href="#general">General</a>
+      <a href="#mac">Mac App</a>
+      <a href="#claude">Claude</a>
+      <a href="#codex">Codex</a>
+      <a href="#sync">iCloud Sync</a>
+      <a href="#iphone">iPhone App</a>
+      <a href="#widgets">Widgets</a>
+      <a href="#notifications">Notifications</a>
+      <a href="#subscription">Subscription</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+    </nav>
+
+    <!-- GENERAL -->
+    <section class="section" id="general">
+      <h2 class="section-title">General</h2>
+
+      <details>
+        <summary>What is VibeQuota?</summary>
+        <div class="answer"><p>VibeQuota helps developers see when Claude or Codex usage is getting close to practical limits. It shows your usage windows, reset timing, account status, and related usage context wherever that data is available — right from your Mac menu bar or your phone.</p></div>
+      </details>
+
+      <details>
+        <summary>Which providers does VibeQuota support?</summary>
+        <div class="answer"><p>VibeQuota V1 supports <strong>Claude</strong> and <strong>Codex</strong>. More providers may come later.</p></div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota predict exactly when I'll hit a limit?</summary>
+        <div class="answer"><p>No. VibeQuota shows the latest known usage and reset information from the provider. When it shows status language like <strong>Heavy</strong> or <strong>Limit Risk</strong>, treat it as a conservative warning — not an exact prediction.</p></div>
+      </details>
+
+      <details>
+        <summary>Is VibeQuota an official Claude or Codex app?</summary>
+        <div class="answer"><p>No. VibeQuota is an independent app. It is not official, endorsed, sponsored, or operated by Anthropic, OpenAI, or any other provider.</p></div>
+      </details>
+
+      <details>
+        <summary>Do I need both the Mac app and the iPhone app?</summary>
+        <div class="answer"><p>For iPhone use, yes. The Mac app collects your usage data and syncs it; the iPhone app displays that synced data. You can use the Mac app entirely on its own — but the iPhone app needs Mac-synced data to show real usage.</p></div>
+      </details>
+    </section>
+
+    <!-- MAC -->
+    <section class="section" id="mac">
+      <h2 class="section-title">Mac App</h2>
+
+      <details>
+        <summary>What does the Mac app do?</summary>
+        <div class="answer"><p>It runs in your menu bar and collects usage data for Claude and Codex. It shows current usage in the menu, updates your desktop widgets, and can sync snapshots to iCloud for the iPhone app.</p></div>
+      </details>
+
+      <details>
+        <summary>Where do I set up providers?</summary>
+        <div class="answer"><p>Open VibeQuota from the menu bar, then go to <strong>Settings → Providers</strong>. From there you can select Claude or Codex, enable or disable it, refresh it, and manage connection options.</p></div>
+      </details>
+
+      <details>
+        <summary>How do I refresh usage?</summary>
+        <div class="answer"><p>Use the <strong>Refresh</strong> action in the menu bar menu, or the refresh button in <strong>Settings → Providers</strong> for a specific provider.</p></div>
+      </details>
+
+      <details>
+        <summary>Can it refresh automatically?</summary>
+        <div class="answer"><p>Yes. Go to <strong>Settings → General → Refresh cadence</strong>. You can choose manual refresh or automatic intervals such as 1, 2, 3, 5, 15, or 30 minutes. If you pick manual, the automatic timer is turned off and you refresh whenever you like.</p></div>
+      </details>
+
+      <details>
+        <summary>Can VibeQuota launch at login?</summary>
+        <div class="answer"><p>Yes — use <strong>Settings → General → Start at Login</strong>.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I hide personal information?</summary>
+        <div class="answer"><p>Yes. On Mac use <strong>Settings → Advanced → Hide personal information</strong>; on iPhone use <strong>Settings → Usage Settings → Hide personal information</strong>. This obscures email addresses in the app UI.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I show "used" vs "remaining" quota?</summary>
+        <div class="answer"><p>Yes. On Mac use <strong>Settings → Display → Show usage as used</strong>; on iPhone use <strong>Settings → Usage Settings → Show remaining usage</strong>.</p></div>
+      </details>
+
+      <details>
+        <summary>What do Session and Weekly mean?</summary>
+        <div class="answer"><p><strong>Session</strong> is usually the provider's shorter active usage window. <strong>Weekly</strong> is a longer window when the provider exposes one. The exact definitions come from the provider's own data.</p></div>
+      </details>
+
+      <details>
+        <summary>What does Reset mean?</summary>
+        <div class="answer"><p>Reset is the time a usage window is expected to reset, as reported or derived from the provider. If the provider doesn't expose a reset time, VibeQuota may show a pending or unavailable state.</p></div>
+      </details>
+
+      <details>
+        <summary>What do OK, Moderate, Heavy, and Limit Risk mean?</summary>
+        <div class="answer">
+          <p>They're simple status labels based on usage percentage:</p>
+          <ul>
+            <li><strong>OK</strong> — usage is low.</li>
+            <li><strong>Moderate</strong> — usage is around the middle of the window.</li>
+            <li><strong>Heavy</strong> — usage is high.</li>
+            <li><strong>Limit Risk</strong> — usage is near the limit.</li>
+            <li><strong>Unavailable</strong> — no usable data for that provider.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota show costs?</summary>
+        <div class="answer"><p>Where available, yes — it can show estimated local cost, credits, or dashboard extras when a supported source provides them. Availability depends on the provider, account state, and your enabled options. Costs are estimates or provider-reported summaries; your provider's own billing page is always the final authority.</p></div>
+      </details>
+    </section>
+
+    <!-- CLAUDE -->
+    <section class="section" id="claude">
+      <h2 class="section-title">Claude</h2>
+
+      <details>
+        <summary>How does VibeQuota connect to Claude?</summary>
+        <div class="answer"><p>The Mac app supports a first-party Claude OAuth sign-in flow. Depending on your build and environment, it may also support Claude web sign-in or a local Claude CLI fallback. Connect under <strong>Settings → Providers → Claude</strong>.</p></div>
+      </details>
+
+      <details>
+        <summary>Why does Claude show as unavailable?</summary>
+        <div class="answer">
+          <p>Common reasons:</p>
+          <ul>
+            <li>Claude is disabled in settings.</li>
+            <li>Claude sign-in hasn't been completed.</li>
+            <li>The saved Claude session expired.</li>
+            <li>The selected source can't read usage.</li>
+            <li>The provider didn't return a weekly/session window.</li>
+            <li>Network or provider service issues blocked the refresh.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>What if Claude weekly usage is unavailable?</summary>
+        <div class="answer"><p>Some Claude accounts or sources don't return every usage window. VibeQuota will still show whatever windows it can read.</p></div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota read my Claude prompts or code?</summary>
+        <div class="answer"><p>No. VibeQuota is designed not to collect, sync, or analyze prompts or code. Provider integrations only use the limited data needed to determine usage state.</p></div>
+      </details>
+
+      <details>
+        <summary>Does it support Claude Admin API usage?</summary>
+        <div class="answer"><p>Yes, when an Anthropic Admin API key is configured. This can show organization-level spend, message, or token summaries. Only configure an Admin API key if you understand and intend to use that feature.</p></div>
+      </details>
+    </section>
+
+    <!-- CODEX -->
+    <section class="section" id="codex">
+      <h2 class="section-title">Codex</h2>
+
+      <details>
+        <summary>How does VibeQuota connect to Codex?</summary>
+        <div class="answer"><p>Codex support can use Codex OAuth credentials and the Codex CLI RPC. Optional Codex web usage can add dashboard extras like credits, code review usage, usage breakdown, and credits history when enabled. Connect under <strong>Settings → Providers → Codex</strong>.</p></div>
+      </details>
+
+      <details>
+        <summary>Why does Codex ask for folder access?</summary>
+        <div class="answer"><p>Some Codex paths need permission to read local Codex data, such as files under the Codex configuration directory. This is limited to known Codex locations and is meant to be visible to you.</p></div>
+      </details>
+
+      <details>
+        <summary>What is Codex web usage?</summary>
+        <div class="answer"><p>An optional setting that uses your chatgpt.com / Codex web session to display extra dashboard details. It's opt-in because hidden web refreshes can use network and battery. <strong>Battery Saver</strong> reduces routine background refreshes for these extras — manual refresh still works whenever you want it.</p></div>
+      </details>
+
+      <details>
+        <summary>Can VibeQuota handle multiple Codex accounts?</summary>
+        <div class="answer"><p>Yes. The Mac app has account controls for Codex, and the iPhone app groups multiple accounts for the same provider.</p></div>
+      </details>
+
+      <details>
+        <summary>What if Codex usage doesn't refresh?</summary>
+        <div class="answer">
+          <p>Check that:</p>
+          <ul>
+            <li>Codex is enabled in <strong>Settings → Providers</strong>.</li>
+            <li>The selected Codex usage source is available.</li>
+            <li>Codex credentials are valid.</li>
+            <li>Any requested folder access has been granted.</li>
+            <li>The local Codex CLI works, if you're using a CLI-backed path.</li>
+            <li>Optional web usage is enabled only if you want web dashboard extras.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- SYNC -->
+    <section class="section" id="sync">
+      <h2 class="section-title">iCloud Sync</h2>
+
+      <details>
+        <summary>How does Mac-to-iPhone sync work?</summary>
+        <div class="answer">
+          <p>The Mac app writes usage snapshots to your private iCloud database, and the iPhone app reads those snapshots. The flow is:</p>
+          <ul>
+            <li>Claude/Codex usage is collected by the Mac app.</li>
+            <li>The Mac app writes local widget data and CloudKit sync data.</li>
+            <li>The iPhone app fetches the latest private CloudKit data.</li>
+            <li>iPhone widgets read the iPhone app's local widget cache.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Do I need to be signed in to iCloud?</summary>
+        <div class="answer"><p>Yes, for cross-device sync. Your Mac and iPhone should use the same iCloud account, and iCloud Drive / CloudKit access must be available.</p></div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota use a custom backend?</summary>
+        <div class="answer"><p>No. VibeQuota is built around local device storage and your private iCloud database — there's no VibeQuota server in the middle.</p></div>
+      </details>
+
+      <details>
+        <summary>What data is synced?</summary>
+        <div class="answer">
+          <p>Things like provider name, usage percentage, reset time, last updated time, sync status, provider availability, error status, source device name, account display identity (to tell accounts apart), and cost/token summaries where collected.</p>
+          <p>It does <strong>not</strong> sync prompts, code, raw logs, API keys, access tokens, cookies, credentials, environment variables, repository names, or file paths.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How often does the iPhone update?</summary>
+        <div class="answer"><p>The iPhone app fetches data on launch, when returning to the foreground, on pull-to-refresh, from CloudKit silent pushes, and periodically while open (roughly every two minutes). Background timing is ultimately controlled by iOS and iCloud.</p></div>
+      </details>
+
+      <details>
+        <summary>How do I force an iPhone refresh?</summary>
+        <div class="answer"><p>Pull down on the Usage list, or open <strong>Settings → About &amp; Sync</strong> and tap the refresh button in Sync Status.</p></div>
+      </details>
+
+      <details>
+        <summary>What does "No Data" mean?</summary>
+        <div class="answer">
+          <p>Usually the iPhone hasn't found Mac data in iCloud yet. Check that:</p>
+          <ul>
+            <li>The Mac app is installed and has run at least once.</li>
+            <li>Claude or Codex is enabled on Mac.</li>
+            <li>iCloud Sync is enabled on Mac (<strong>Settings → Mobile</strong>).</li>
+            <li>Mac and iPhone use the same iCloud account.</li>
+            <li>The Mac has successfully refreshed provider data.</li>
+            <li>The iPhone has network access.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>What do "Incompatible Data" and "Sync Error" mean?</summary>
+        <div class="answer"><p><strong>Incompatible Data</strong> means the iPhone found synced data it couldn't decode — update VibeQuota on both Mac and iPhone so they share the same format. <strong>Sync Error</strong> means the CloudKit fetch couldn't complete, usually due to network issues, iCloud account/storage problems, or a temporary CloudKit service error.</p></div>
+      </details>
+
+      <details>
+        <summary>Can multiple Macs sync to one iPhone?</summary>
+        <div class="answer"><p>Yes. The iPhone app can read snapshots from multiple Macs and merge them into one view. See which Macs are syncing under <strong>Settings → About &amp; Sync</strong> in the Devices section. If one Mac is on an older version, the iPhone may flag it as outdated (or using legacy key-value sync) — update that Mac for the most complete data.</p></div>
+      </details>
+    </section>
+
+    <!-- IPHONE -->
+    <section class="section" id="iphone">
+      <h2 class="section-title">iPhone App</h2>
+
+      <details>
+        <summary>What does the iPhone app show?</summary>
+        <div class="answer"><p>The latest provider usage synced from your Mac. It has two tabs: <strong>Usage</strong> and <strong>Settings</strong>.</p></div>
+      </details>
+
+      <details>
+        <summary>Can the iPhone app collect usage by itself?</summary>
+        <div class="answer"><p>No. It's a display client — it doesn't log in to Claude or Codex directly and doesn't collect provider usage itself. That's why onboarding notes the Mac app is required: the Mac is the collector, and it must push data to iCloud before real usage appears.</p></div>
+      </details>
+
+      <details>
+        <summary>What is demo mode?</summary>
+        <div class="answer"><p>Demo mode lets you preview the iPhone UI with sample data before your Mac has synced real data. Tap <strong>Exit Demo</strong> to leave it.</p></div>
+      </details>
+
+      <details>
+        <summary>What is the Usage tab?</summary>
+        <div class="answer"><p>It shows provider cards for synced Claude and Codex data — provider name, account identity when available, usage windows, reset timing, status messages, a cost teaser, and account grouping. Tap a card to see the detailed rate-limit windows, provider-specific details, and utilization history if synced.</p></div>
+      </details>
+
+      <details>
+        <summary>What does the small number next to a provider name mean?</summary>
+        <div class="answer"><p>It means the iPhone has grouped multiple accounts for that provider. Tap the provider to switch between accounts in the detail view.</p></div>
+      </details>
+
+      <details>
+        <summary>What is account merging?</summary>
+        <div class="answer"><p>If data from different Mac versions looks like the same account but can't be linked automatically, the iPhone may ask whether the records are the same. Confirm only when you recognize them as the same login. You can undo a merge later from the provider card's context menu.</p></div>
+      </details>
+
+      <details>
+        <summary>What settings are on iPhone?</summary>
+        <div class="answer"><p>Setup Guide, About &amp; Sync, Release Notes, Usage Settings, Troubleshooting, and a link to vibequota.com. Usage Settings cover remaining vs used quota, the quota warning marker, changelog link visibility, and hiding personal information.</p></div>
+      </details>
+
+      <details>
+        <summary>Does the iPhone app support notifications?</summary>
+        <div class="answer"><p>Yes — it can send quota transition alerts and related sync notifications. You can deny permission and still view synced usage when you open the app. Timing and delivery are controlled by iOS, APNs, and iCloud.</p></div>
+      </details>
+    </section>
+
+    <!-- WIDGETS -->
+    <section class="section" id="widgets">
+      <h2 class="section-title">Widgets</h2>
+
+      <details>
+        <summary>Which widgets are available?</summary>
+        <div class="answer">
+          <p><strong>macOS:</strong> VibeQuota Switcher, Usage, History, and Metric — these read the local snapshot written by the Mac app.</p>
+          <p><strong>iPhone:</strong> Home screen small / medium / large, plus lock screen circular, rectangular, and inline. They show Claude and Codex usage from the latest synced snapshot, including session and weekly usage where available.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Are widgets live / real-time?</summary>
+        <div class="answer"><p>No. Widgets show the latest snapshot available to WidgetKit, and the operating system decides when widgets reload. VibeQuota asks widgets to reload after a successful refresh, but it can't guarantee real-time updates.</p></div>
+      </details>
+
+      <details>
+        <summary>Why does my widget say Preview / Open app to sync / No widget data?</summary>
+        <div class="answer">
+          <p><strong>Preview</strong> — the widget is using placeholder data because it hasn't loaded a real snapshot yet. Open the app, let it sync, then wait for the widget to refresh.</p>
+          <p><strong>Open app to sync</strong> — the widget has no current local data. Open VibeQuota on that device so it can fetch iCloud data and write the widget cache.</p>
+          <p><strong>No widget data</strong> — the cache exists but has no usable provider data. Check that Claude or Codex is enabled on the Mac, the Mac has refreshed, and the iPhone has synced.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Why does my widget say Expired? What are the freshness states?</summary>
+        <div class="answer">
+          <p>The snapshot is older than the freshness window — open the app or refresh sync to get newer data. Freshness is separate from how high your usage is:</p>
+          <ul>
+            <li><strong>Fresh</strong> — updated within ~5 minutes.</li>
+            <li><strong>Stale</strong> — about 5 to 30 minutes old.</li>
+            <li><strong>Expired</strong> — older than ~30 minutes.</li>
+            <li><strong>Unavailable</strong> — no usable snapshot exists.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section class="section" id="notifications">
+      <h2 class="section-title">Notifications</h2>
+
+      <details>
+        <summary>What are session quota notifications?</summary>
+        <div class="answer"><p>Alerts related to usage window changes — for example usage reaching a warning threshold, a session becoming depleted, or usage being restored.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I turn notifications off?</summary>
+        <div class="answer"><p>Yes. On Mac, use <strong>Settings → General</strong> for local session quota and warning notifications. For iPhone push forwarding, use <strong>Settings → Mobile → iOS Push Notifications</strong>. You can also manage permission in iOS Settings.</p></div>
+      </details>
+
+      <details>
+        <summary>What are quota warning markers?</summary>
+        <div class="answer"><p>Visual threshold markers on the usage bars that show when a window is approaching a configured warning level. The Mac app exposes warning threshold settings in General and provider settings; availability can vary by build and provider.</p></div>
+      </details>
+    </section>
+
+    <!-- SUBSCRIPTION -->
+    <section class="section" id="subscription">
+      <h2 class="section-title">Subscription &amp; Purchase</h2>
+
+      <details>
+        <summary>Is there a trial?</summary>
+        <div class="answer"><p>Yes — a 7-day app-managed trial. The trial clock is stored locally in your Mac Keychain.</p></div>
+      </details>
+
+      <details>
+        <summary>What is the lifetime unlock?</summary>
+        <div class="answer"><p>VibeQuota unlocks with a one-time lifetime purchase. The Subscription tab (<strong>Settings → Subscription</strong>) shows your access state, trial status, unlock controls, and restore purchase.</p></div>
+      </details>
+
+      <details>
+        <summary>What happens when the trial expires?</summary>
+        <div class="answer"><p>If no lifetime unlock is active, provider collection pauses and synced/widget surfaces are cleared or locked rather than showing stale active data. If purchase status can't be checked (e.g. you're briefly offline), the app handles it carefully so you aren't immediately locked out during a temporary problem.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I restore a purchase?</summary>
+        <div class="answer"><p>Yes — use <strong>Settings → Subscription → Restore</strong>.</p></div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota send usage data to RevenueCat?</summary>
+        <div class="answer"><p>No. The purchase integration uses RevenueCat for purchase and entitlement state only. Provider credentials, usage values, account emails, prompts, code, and logs are not sent to RevenueCat.</p></div>
+      </details>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="section" id="privacy">
+      <h2 class="section-title">Privacy &amp; Data</h2>
+
+      <details>
+        <summary>What does VibeQuota avoid collecting?</summary>
+        <div class="answer">
+          <p>VibeQuota is designed not to collect, transmit, or analyze:</p>
+          <ul>
+            <li>Prompts and code</li>
+            <li>Repository names and file paths</li>
+            <li>Raw logs</li>
+            <li>API keys, access tokens, and credentials</li>
+            <li>Environment variables</li>
+            <li>Browser cookies and session tokens</li>
+            <li>Usernames from local paths</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota read browser cookies?</summary>
+        <div class="answer"><p>Some optional provider paths may use browser cookies or manual cookie headers to read usage data. These paths are meant to be visible to you, limited to provider-specific origins, and never sent to analytics or crash reporting. Manual cookie headers are secrets — only paste them into VibeQuota if you understand the flow, and never share them publicly, commit them, or put them in screenshots.</p></div>
+      </details>
+
+      <details>
+        <summary>Where is the provider config file?</summary>
+        <div class="answer"><p>The compatibility config file is <code class="path">~/.codexbar/config.json</code>. It may contain provider settings, manual cookies, API keys, source selection, ordering, and token accounts — keep it private. The path still says "codexbar" because some internal paths are inherited from the upstream codebase and can't be renamed casually without breaking existing user data or migrations.</p></div>
+      </details>
+
+      <details>
+        <summary>Does VibeQuota use analytics or crash reporting?</summary>
+        <div class="answer"><p>If analytics is ever enabled, only privacy-safe product events are allowed — never prompts, code, file paths, provider responses, tokens, credentials, or raw usage details. Crash/error reporting is planned with privacy scrubbing and must not attach raw provider logs, prompts, code, file paths, tokens, cookies, or credentials.</p></div>
+      </details>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section class="section" id="troubleshooting">
+      <h2 class="section-title">Troubleshooting</h2>
+
+      <details>
+        <summary>The Mac menu bar item is missing.</summary>
+        <div class="answer">
+          <ul>
+            <li>Open VibeQuota from Applications.</li>
+            <li>Check whether macOS hid menu bar extras due to limited space.</li>
+            <li>Restart the app.</li>
+            <li>Check <strong>Settings → General → Start at Login</strong> if you expected it to launch automatically.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Claude or Codex is missing from the app.</summary>
+        <div class="answer"><p>Open <strong>Settings → Providers</strong> and confirm the provider is enabled. VibeQuota V1 only shows Claude and Codex.</p></div>
+      </details>
+
+      <details>
+        <summary>Usage is stale on Mac.</summary>
+        <div class="answer"><p>Use Refresh from the menu bar or <strong>Settings → Providers</strong>. If the provider still fails, check its sign-in/source settings and any displayed error message.</p></div>
+      </details>
+
+      <details>
+        <summary>Usage is stale on iPhone.</summary>
+        <div class="answer">
+          <ul>
+            <li>Refresh the Mac app.</li>
+            <li>Confirm <strong>Settings → Mobile → iCloud Sync</strong> is enabled on Mac.</li>
+            <li>Open the iPhone app and pull to refresh.</li>
+            <li>Check <strong>Settings → About &amp; Sync</strong> for status and device list.</li>
+            <li>Update both apps if versions differ significantly.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>The iPhone says "No Providers Enabled" or "No Mac data found."</summary>
+        <div class="answer"><p><strong>No Providers Enabled</strong> means a Mac snapshot was found but no provider data is enabled — enable Claude or Codex on Mac and refresh. <strong>No Mac data found</strong> means no usable snapshot is in iCloud yet — confirm the Mac has iCloud Sync enabled, has refreshed successfully, and uses the same iCloud account.</p></div>
+      </details>
+
+      <details>
+        <summary>A widget isn't updating.</summary>
+        <div class="answer"><p><strong>iPhone:</strong> open the app, pull to refresh, then wait for WidgetKit to reload. If needed, remove and re-add the widget; check <strong>Settings → Troubleshooting → Raw Sync Data</strong> for cache diagnostics. <strong>macOS:</strong> open the Mac app and refresh — desktop widgets read the Mac app's local snapshot, so they need the Mac app to write a fresh one.</p></div>
+      </details>
+
+      <details>
+        <summary>I see mock data, or an old/duplicate account.</summary>
+        <div class="answer"><p><strong>Mock data</strong> is synthetic test data that should only appear when debug tooling is enabled — turn it off in the Mac app's Mobile/debug settings and let things sync again. <strong>Duplicate or stale accounts</strong> can appear from multiple Macs, older versions, or identity changes; the iPhone has merge/unmerge and cleanup tools, but updating all Macs and refreshing usually resolves it.</p></div>
+      </details>
+
+      <details>
+        <summary>What should I send support when sync is broken?</summary>
+        <div class="answer">
+          <p>A description of what you see, plus these non-secret details:</p>
+          <ul>
+            <li>Mac app version and iPhone app version.</li>
+            <li>Whether <strong>Settings → Mobile → iCloud Sync</strong> is enabled.</li>
+            <li>iPhone <strong>Settings → About &amp; Sync</strong> status.</li>
+            <li>Number of devices listed and the provider names affected.</li>
+            <li>Screenshots with emails or personal data hidden.</li>
+          </ul>
+          <p>Never send cookies, tokens, API keys, raw logs, prompts, code, repository names, file paths, or credentials.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Where can I find setup and support?</summary>
+        <div class="answer"><p>Right here at <a href="https://vibequota.com">vibequota.com</a>.</p></div>
+      </details>
+    </section>
+
+    <div class="back">
+      <a href="/">← Back to home</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>© 2025 PassingLane Solutions LLC</span>
+    <span>Know your limits.</span>
+    <span class="footer-links">
+      <a href="/faq.html">FAQ</a>
+      <a href="/privacy.html">Privacy</a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
